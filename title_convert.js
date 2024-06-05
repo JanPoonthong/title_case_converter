@@ -18,6 +18,12 @@ function sentenceCaseConvert(args) {
   return modifiedTitle;
 }
 
+function help(args) {
+  console.error("Unknow argument");
+  console.error("use --nospace, --titlecase, --sentencecase");
+  return null;
+}
+
 function main() {
   const args = require("args-parser")(process.argv);
   let title;
@@ -28,9 +34,13 @@ function main() {
     title = titleCaseConvert(args.titlecase);
   } else if (args.sentencecase) {
     title = sentenceCaseConvert(args.sentencecase);
+  } else {
+    title = help(args);
   }
 
-  console.log(title);
+  if (title != null) {
+    console.log(title);
+  }
 }
 
 main();
